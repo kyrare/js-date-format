@@ -6,7 +6,8 @@ js-date-format
 Пример использования:
 ---------------------
 
-```var date = new Date();
+```
+var date = new Date();
 date.format('d.m.Y'); //11.11.2015
 ```
 
