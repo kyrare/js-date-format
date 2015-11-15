@@ -28,15 +28,15 @@ Date.prototype.format = function (format) {
             l: days_names[DN + 6],
             N: DN,
             w: D,
-            z: Math.floor((this - new Date(this.getFullYear(), 0, 0)) / (60 * 60 * 24 * 1000)), //пиздец полный и не точный, но лучше на js нет
+            z: Math.floor((new Date(y, m - 1, d) - new Date(y, 0, 0)) / 864e5) - 1,
 
             m: pad(m),
             n: m,
             M: month_names[m],
             F: month_names[m + 12],
-            t: 32 - new Date(y, m - 1, 32).getDate(),
+            t: new Date(Date.UTC(y, m, 0)).getDate(),
 
-            L: y % 4 == 0 ? 1 : 0,
+            L: ((y % 4 === 0 && y % 100 !== 0) || y % 400 === 0) == 0 ? 1 : 0,
             Y: y,
             y: y.toString().substr(2),
 
@@ -46,8 +46,8 @@ Date.prototype.format = function (format) {
             h: H < 12 ? H : pad(H - 12),
             G: H,
             H: pad(H),
-            i: M,
-            s: S,
+            i: pad(M),
+            s: pad(S),
             u: MS,
 
             U: this.getTime()
